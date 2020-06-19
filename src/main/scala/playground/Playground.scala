@@ -20,7 +20,7 @@ object Playground extends App {
   object Person {
     def props(name:String):Props = Props(new Person(name))
   }
-  
+
   class Person(name:String) extends Actor {
     override def receive: Receive = {
       case "name" => println(s"my name is $name")
