@@ -7,10 +7,12 @@ object CapActor extends App {
   class SimpleActor extends Actor {
 
     override def receive: Receive = {
-      case "Hi!" => context.sender() ! "hello, there"
+      case "Hi!" =>
+        println(sender() + "-----------" + self)
+//        context.sender() ! "hello, there"
       case message: String =>
-        println(s"sender() $sender()")
-        println(s"[$self] message: $message")
+        println(s"sender= $sender(), self=$self $message")
+        sender() ! "Hi!"
       case SpecialMessage(name, title) => println(name, title)
       case SendFriend(actor) => actor ! s"Hi!"
       case Message(text, bob) => bob ! text
